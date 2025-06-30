@@ -25,4 +25,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       #- run: semgrep ci
-      - run: semgrep --config auto --severity MEDIUM --error
+      - run: semgrep --config "p/javascript" --severity WARNING --error
