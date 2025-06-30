@@ -18,21 +18,10 @@ jobs:
       contents: read
     env:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+    
+    container:
+      image: semgrep/semgrep:latest
 
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v4
-      
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Instalar dependencias
-        run: npm ci
-      
-      - name: Instalar Semgrep OSS
-        run: pip install semgrep
-
-      - name: Ejecutar Semgrep
-        run: semgrep --config p/default --error
+      - uses: actions/checkout@v3
+      - run: semgrep ci
