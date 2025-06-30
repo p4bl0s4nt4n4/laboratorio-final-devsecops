@@ -24,4 +24,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: semgrep ci
+      #- run: semgrep ci
+      - run: semgrep --config auto --severity MEDIUM --error
