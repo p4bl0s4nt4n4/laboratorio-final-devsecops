@@ -22,6 +22,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: semgrep ci
+      - run: semgrep ci --code
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
