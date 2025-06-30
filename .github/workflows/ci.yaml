@@ -11,7 +11,7 @@ on:
     - cron: '12 15 * * *'
 
 jobs:
-  semgrep:
+  sast:
     name: Análisis estático con Semgrep
     runs-on: ubuntu-latest
     permissions:
@@ -23,5 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: semgrep ci --code
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+  
+  sca:
+    name: Análisis de composición de software con Semgrep
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    container:
+      image: semgrep/semgrep:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: semgrep ci --supply-chain
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
