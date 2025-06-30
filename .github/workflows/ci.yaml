@@ -7,11 +7,17 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: '12 15 * * *'
 
 jobs:
   semgrep:
     name: Análisis estático con Semgrep
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
 
     steps:
       - name: Clonar repositorio
