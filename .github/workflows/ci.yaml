@@ -29,6 +29,7 @@ jobs:
   sca:
     name: Análisis de composición de software con Semgrep
     runs-on: ubuntu-latest
+    needs: sast
     permissions:
       contents: read
     
@@ -44,6 +45,7 @@ jobs:
   image-docker-scan:
     name: Construcción y escaneo de imagen Docker
     runs-on: ubuntu-latest
+    needs: sca
 
     steps:
       - name: Checkout del repositorio
@@ -62,3 +64,21 @@ jobs:
           ignore-unfixed: true
           vuln-type: os,library
           severity: CRITICAL,HIGH
+  
+  deploy-image-local:
+    name: Despliegue de imagen en docker local
+    runs-on: self-hosted
+    needs: image-docker-scan
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Construir imagen Docker
+        run: docker build -t aplicacion:latest .
+
+      - name: Ejecutar contenedor
+        run: |
+          docker stop aplicacion || true
+          docker rm aplicacion || true
+          docker run -d --name aplicacion -p 80:80 aplicacion:latest
