@@ -13,7 +13,7 @@ on:
 jobs:
   sast:
     name: Análisis estático con Semgrep
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
     
@@ -28,7 +28,7 @@ jobs:
   
   sca:
     name: Análisis de composición de software con Semgrep
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     permissions:
       contents: read
     
@@ -43,7 +43,7 @@ jobs:
   
   image-docker-scan:
     name: Construcción y escaneo de imagen Docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout del repositorio
