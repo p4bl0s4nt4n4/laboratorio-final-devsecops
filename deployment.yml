@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Reddit-clone-deployment
+  name: reddit-clone-deployment
   labels:
     app: kuber-project
 spec:
@@ -13,10 +13,13 @@ spec:
     metadata:
       labels: 
         app: kuber-project
-    
     spec:
       containers:
       - name: result-app
-        image:
+        image: aplicacion:latest  # Asegúrate de especificar la imagen
         ports:
         - containerPort: 3000
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
