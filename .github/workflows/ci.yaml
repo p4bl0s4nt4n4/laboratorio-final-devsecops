@@ -79,8 +79,8 @@ jobs:
 
       - name: Ejecutar contenedor
         run: |
-          docker stop aplicacion || true
-          docker rm aplicacion || true
+          docker stop aplicacion \
+          docker rm aplicacion \
           docker run -d \
             --name aplicacion \
             -e NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }} \
