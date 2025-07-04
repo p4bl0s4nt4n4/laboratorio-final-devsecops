@@ -1,4 +1,4 @@
-FROM node:19-alpine3.15
+FROM node:22-alpine3.21
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /reddit-clone
