@@ -78,6 +78,7 @@ jobs:
         run: docker build -t aplicacion:latest .
 
       - name: Ejecutar contenedor
+        shell: bash
         run: |
           docker stop aplicacion
           docker rm aplicacion
